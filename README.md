@@ -18,7 +18,7 @@ Esse script consulta a bandeira vigente e o valor adicional do KWh. Ele devolve 
 
 ## Como usar no Homeassistant
 
-Um maneira de usar esses script no homeassistant é usa-los como sensores do tipo command_line. Crie um folder "shell_scripts" no seu HA, coloque os scripts lá com permissão de execução e configure conforme o yaml abaixo:
+Um maneira de usar esses scripts no homeassistant é usa-los como sensores do tipo command_line. Crie um folder "shell_scripts" no seu HA, coloque os scripts lá com permissão de execução e configure conforme o yaml abaixo:
 
 `````
 command_line:
