@@ -7,7 +7,7 @@ A ANEEL disponibiliza através da plataforma dadosabertos.aneel.gov.br vários d
 
 ### tarifa.py
 
-Esse script baixa e calcula o preço por KWh da modalidade residencial convencional de acordo com a operadora de energia. Consulte a base de dados da Aneel em https://dadosabertos.aneel.gov.br/dataset/tarifas-distribuidoras-energia-eletrica/resource/fcf2906c-7c32-4b9b-a637-054e7a5234f4 [tarifas-distribuidoras-energia] para consultar o nome da sua distribuidora (use a busca e veja o valor da coluna SigAgente).
+Esse script baixa e calcula o preço por KWh da modalidade residencial convencional de acordo com a operadora de energia. Consulte a base de dados da Aneel em https://dadosabertos.aneel.gov.br/dataset/tarifas-distribuidoras-energia-eletrica/resource/fcf2906c-7c32-4b9b-a637-054e7a5234f4 [tarifas-distribuidoras-energia] para consultar o nome da sua distribuidora (use a busca e veja o valor da coluna SigAgente). Modifique a variavel "operadora" do script com a sua operadora.
 
 Caso vc use a modalidade de tarifa branca, ou de propriedade rural, etc, vai precisar modificar o script. Observe que o preço da tarifa é a soma da Tarifa de Energia + o Tarifa de Uso do Sistema de Distribuição (o script já te dá o valor somado, mas pode ser modificado para mostrar os valores de maneira separada).
 
