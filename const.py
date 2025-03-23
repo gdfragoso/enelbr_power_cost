@@ -17,7 +17,7 @@ SENSOR_TYPES = {
         "api_field": "cost",
         "device_class": SensorDeviceClass.MONETARY,
         "state_class": SensorStateClass.MEASUREMENT,
-        "unit": "BRL",
+        "unit": "BRL/kWh",
     },
     "enelbr_tariff_flag": {
         "name": "Bandeira Tarifária",
