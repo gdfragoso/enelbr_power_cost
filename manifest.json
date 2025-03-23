@@ -1,0 +1,11 @@
+{
+    "domain": "enelbr_power_cost",
+    "name": "Enel-BR Power Cost",
+    "version": "1.0.0",
+    "documentation": "https://github.com/seu-repositorio/enel_br_tariff",
+    "requirements": [],
+    "dependencies": [],
+    "codeowners": ["@gdfragoso"],
+    "iot_class": "cloud_polling",
+    "config_flow": true
+  }

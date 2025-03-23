@@ -1,35 +1,48 @@
-# tarifa-energia-br
-Scripts python para buscar o valor da tarifa de energia da base de dados da aneel.
+# Integração EnelBR Power Cost para Home Assistant
 
-## Introdução
+## Visão Geral
 
-A ANEEL disponibiliza através da plataforma dadosabertos.aneel.gov.br vários dados, entre eles os de tarifa de energia elétrica e bandeiras tarifárias. Os scripts desse repositório conseguem extrair esses dados de maneira ainda bastante simples (e fragil...), mas a idéia é que possam ser melhorados/adaptados com o uso.
+A integração **EnelBR Power Cost** permite obter informações sobre a tarifa de energia elétrica e a bandeira tarifária vigente diretamente no Home Assistant. Os dados são obtidos a partir dos **Dados Abertos da ANEEL**.
 
-### tarifa.py
+## Recursos
 
-Esse script baixa e calcula o preço por KWh da modalidade residencial convencional de acordo com a operadora de energia. Consulte a base de dados da Aneel em https://dadosabertos.aneel.gov.br/dataset/tarifas-distribuidoras-energia-eletrica/resource/fcf2906c-7c32-4b9b-a637-054e7a5234f4 [tarifas-distribuidoras-energia] para consultar o nome da sua distribuidora (use a busca e veja o valor da coluna SigAgente). Modifique a variavel "operadora" do script com a sua operadora.
+- Obtém automaticamente a **bandeira tarifária vigente** (verde, amarela ou vermelha).
+- Obtém o **custo da tarifa de energia elétrica** da distribuidora selecionada.
+- **Atualização automática periódica** via Data Update Coordinator.
+- **Integração via UI** no Home Assistant.
 
-Caso vc use a modalidade de tarifa branca, ou de propriedade rural, etc, vai precisar modificar o script. Observe que o preço da tarifa é a soma da Tarifa de Energia + o Tarifa de Uso do Sistema de Distribuição (o script já te dá o valor somado, mas pode ser modificado para mostrar os valores de maneira separada).
+## Instalação
 
+### 1. Adicione a Integração no Home Assistant
 
-## bandeira.py
+1. Copie a pasta `enelbr_power_cost` para dentro do diretório `custom_components` do seu Home Assistant.
+2. Reinicie o Home Assistant para que a integração seja reconhecida.
+3. Acesse **Configuração > Dispositivos & Serviços > Adicionar Integração**.
+4. Pesquise por **EnelBR Power Cost** e clique para adicionar.
 
-Esse script consulta a bandeira vigente e o valor adicional do KWh. Ele devolve um json com esses dois atributos. 
+### 2. Preencha os Dados Necessários
 
-## Como usar no Homeassistant
+- **Operadora de Energia**: O código da distribuidora de energia elétrica.
 
-Um maneira de usar esses scripts no homeassistant é usa-los como sensores do tipo command_line. Crie um folder "shell_scripts" no seu HA, coloque os scripts lá com permissão de execução e configure conforme o yaml abaixo:
+Para encontrar o código da sua operadora, acesse o site da ANEEL:
 
-`````
-command_line:
-  - sensor:
-      name: Preço KWh 
-      command: "/config/shell_scripts/tarifa.py"
-      unit_of_measurement: "R$"
-  - sensor:
-      name: Bandeira Tarifaria
-      json_attributes:
-        - valor 
-      command: "/config/shell_scripts/bandeira.py"
-      value_template: "{{ value_json.bandeira }}"
-`````
+[Lista de Tarifas das Distribuidoras](https://www.aneel.gov.br)
+
+Procure pelo nome da sua distribuidora e utilize o valor da coluna **SigAgente**.
+
+## Sensores Criados
+
+Após a configuração, dois sensores serão adicionados ao Home Assistant:
+
+| **Sensor**                  | **Descrição**                                            |
+|-----------------------------|----------------------------------------------------------|
+| `sensor.enelbr_tariff_cost` | Mostra o custo da tarifa de energia elétrica (R$/kWh). |
+| `sensor.enelbr_tariff_flag` | Mostra a bandeira tarifária atual (verde, amarela ou vermelha). |
+
+## Atualização dos Dados
+
+Os dados são atualizados periodicamente conforme definido no arquivo `const.py` pela variável `UPDATE_INTERVAL`.
+
+## Contribuição
+
+Se desejar contribuir com melhorias, relatórios de erro ou novas funcionalidades, sinta-se à vontade para abrir uma **issue** ou enviar um **pull request** no repositório do projeto.
